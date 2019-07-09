@@ -16,9 +16,10 @@ class Student < ActiveRecord::Base
 
   def self.search(term)
     if term == ""
-      Student.all
+      redirect_to students_path
     else
-      Student.all.select { |student| student.name.downcase.include?(term.downcase) }
+      @students = Student.all.select { |student| student.name.downcase.include?(term.downcase) }
+      render :index
     end
   end
 end
